@@ -12,6 +12,8 @@ from src.chains import get_llm, stream_recommendations
 from src.utils import parse_json_from_llm, generate_pdf_report
 
 # Page Config
+
+
 st.set_page_config(page_title="FinWise AI", page_icon="💸", layout="wide")
 
 # Session State Initialization
@@ -28,6 +30,9 @@ with st.sidebar:
     st.markdown("Your educational financial assistant.")
     
     st.header("Settings")
+    
+    # OpenAI API Key Input
+    openai_api_key = st.text_input("OpenAI API Key", type="password")
     
     # Cache Selection
     cache_option = st.selectbox("Cache Backend", ["None", "In-Memory", "SQLite"], index=1)
@@ -82,6 +87,14 @@ if submit_button:
     if current_savings > monthly_income:
         st.error("Error: Current Monthly Savings cannot be greater than Monthly Income.")
         st.stop()
+        
+    if not openai_api_key:
+        st.error("Please enter your OpenAI API Key in the sidebar.")
+        st.stop()
+        
+    if not openai_api_key.startswith("sk-"):
+        st.error("Invalid OpenAI API Key format. It should start with 'sk-'.")
+        st.stop()
 
     # Calculations
     total_expenses = calculate_total_expenses(expenses_dict)
@@ -113,7 +126,7 @@ if submit_button:
     user_msg = f"Please analyze my finances. Income: {currency_symbol}{monthly_income}, Expenses: {currency_symbol}{total_expenses}."
     st.session_state.messages.append({"role": "user", "content": user_msg})
     
-    llm = get_llm(model_name=MODEL_NAME)
+    llm = get_llm(api_key=openai_api_key, model_name=MODEL_NAME)
     
     # We use a placeholder to show the streaming text
     with st.spinner("Analyzing..."):

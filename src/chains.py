@@ -2,13 +2,12 @@ from langchain_openai import ChatOpenAI
 from src.prompts import NARRATIVE_CHAT_TEMPLATE
 import os
 
-def get_llm(model_name="gpt-5-nano"):
+
+
+def get_llm(api_key, model_name="gpt-5-nano"):
     """
     Initializes the ChatOpenAI model.
     """
-    api_key = os.getenv("OPENAI_API_KEY")
-    # For local testing, we fallback to a dummy key if not present just so it doesn't crash immediately 
-    # but it will fail on actual API call
     if not api_key:
         api_key = "dummy"
         
