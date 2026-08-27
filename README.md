@@ -1,5 +1,9 @@
 # FinWise AI
 
+# DEPLOYED STREAMLIT LINK:
+
+https://finwiseai-kvcns3kuzrqneympdvbu73.streamlit.app/
+
 FinWise AI is an educational financial-assistant Streamlit web application. It takes user financial inputs, performs deterministic preliminary calculations in Python, and passes this data to an OpenAI LLM using LangChain. The LLM then provides a structured JSON analysis and recommendations which are streamed to the Streamlit frontend.
 
 ## Features
