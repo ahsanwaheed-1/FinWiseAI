@@ -1,6 +1,6 @@
 # FinWise AI
 
-# DEPLOYED STREAMLIT LINK:
+### DEPLOYED STREAMLIT LINK:
 
 https://finwiseai-kvcns3kuzrqneympdvbu73.streamlit.app/
 
